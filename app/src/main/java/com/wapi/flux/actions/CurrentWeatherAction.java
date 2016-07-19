@@ -30,12 +30,11 @@ public class CurrentWeatherAction {
         _dispatcher = dispatcher;
     }
 
-    private static final String key = "b63802cffc7acf6bc2e0ea6e36687c5d";
     private static final String url = "https://api.forecast.io/forecast/";
 
     public void getCurrentWeather(double latitude, double longitude, Context context) {
 
-        String fullUrl = url + key + "/" + String.valueOf(latitude) + "," + String.valueOf(longitude);
+        String fullUrl = url + ApiKey.FORECAST.getKey() + "/" + String.valueOf(latitude) + "," + String.valueOf(longitude);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, fullUrl, null, new Response.Listener<JSONObject>() {
