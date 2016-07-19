@@ -54,7 +54,6 @@ public class CurrentWeatherAction {
         );
         Volley.newRequestQueue(context).add(request);
     }
-
     private Map<ValueKey, Object> formatCurrentData(JSONObject data){
         HashMap<ValueKey, Object> map = new HashMap<>();
         try {
