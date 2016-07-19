@@ -1,1 +1,1 @@
-Wapi
+A weather app I'm creating to explore the ins and outs of Flux architecture, Kotlin, Dagger, Butterknife, and more.
