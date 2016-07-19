@@ -5,7 +5,7 @@ import android.content.Context;
 import com.squareup.otto.Bus;
 import com.wapi.data_access.WeatherDataAccess;
 import com.wapi.flux.dispatcher.Dispatcher;
-import com.wapi.flux.store.WapiStore;
+import com.wapi.flux.store.CurrentWeatherStore;
 
 import javax.inject.Singleton;
 
@@ -37,8 +37,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    WapiStore provideWapiStore(Dispatcher dispatcher) {
-        return new WapiStore(dispatcher);
+    CurrentWeatherStore provideWapiStore(Dispatcher dispatcher) {
+        return new CurrentWeatherStore(dispatcher);
     }
 
     @Provides

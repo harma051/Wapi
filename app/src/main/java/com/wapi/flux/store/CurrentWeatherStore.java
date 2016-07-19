@@ -11,16 +11,16 @@ import javax.inject.Inject;
 /**
  * TODO: Description
  */
-public class WapiStore extends BaseStore {
+public class CurrentWeatherStore extends BaseStore {
 
     @Inject
     Dispatcher dispatcher;
 
-    public double temperature = 10;
+    public String temperature;
     public int summaryResourceId = 0;
 
     @Inject
-    public WapiStore(Dispatcher dispatcher){
+    public CurrentWeatherStore(Dispatcher dispatcher){
         super(dispatcher);
         this.dispatcher = dispatcher;
         dispatcher.register(this);
@@ -30,7 +30,7 @@ public class WapiStore extends BaseStore {
     public void onAction(Action action) {
         switch (action.getType()) {
             case CURRENT_WEATHER_UPDATE:
-                temperature = (Double.valueOf(String.valueOf(action.getData().get(ValueKey.CURRENT_TEMPERATURE))));
+                temperature = (String.valueOf(action.getData().get(ValueKey.CURRENT_TEMPERATURE)));
                 setSummaryResourceId(String.valueOf(action.getData().get(ValueKey.CURRENT_SUMMARY)));
                 break;
         }
@@ -42,20 +42,22 @@ public class WapiStore extends BaseStore {
     }
 
     public void emitStoreChange() {
-        dispatcher.emitChange(changeEvent());
+        dispatcher.emitChange(new CurrentWeatherStoreChangeEvent());
     }
 
     public StoreChangeEvent changeEvent() {
-        return new WapiStore.WapiStoreChangeEvent();
+        return new CurrentWeatherStore.WapiStoreChangeEvent();
     }
 
     public class WapiStoreChangeEvent implements StoreChangeEvent { }
 
-    public double getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
     public int getSummaryResourceId() {
         return summaryResourceId;
     }
+
+    public class CurrentWeatherStoreChangeEvent implements StoreChangeEvent{}
 }

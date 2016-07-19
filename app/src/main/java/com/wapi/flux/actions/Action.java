@@ -1,15 +1,16 @@
 package com.wapi.flux.actions;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * TODO: Description
  */
 public class Action {
     private final ActionType type;
-    private final HashMap<ValueKey, Object> data;
+    private final Map<ValueKey, Object> data;
 
-    Action(ActionType type, HashMap<ValueKey, Object> data) {
+    Action(ActionType type, Map<ValueKey, Object> data) {
         this.type = type;
         this.data = data;
     }
@@ -22,14 +23,14 @@ public class Action {
         return type;
     }
 
-    public HashMap getData() {
+    public Map getData() {
         return data;
     }
 
     public static class Builder {
 
         private ActionType type;
-        private HashMap<ValueKey, Object> data;
+        private Map<ValueKey, Object> data;
 
         Builder with(ActionType type) {
             if (type == null) {
@@ -49,6 +50,11 @@ public class Action {
                 throw new IllegalArgumentException("Value may not be null.");
             }
             data.put(key, value);
+            return this;
+        }
+
+        public Builder bundle(Map<ValueKey, Object> map){
+            data = map;
             return this;
         }
 

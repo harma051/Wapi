@@ -1,10 +1,14 @@
 package com.wapi.flux.dispatcher;
 
+import com.annimon.stream.Stream;
 import com.squareup.otto.Bus;
 import com.wapi.flux.actions.Action;
 import com.wapi.flux.actions.ActionType;
 import com.wapi.flux.actions.ValueKey;
 import com.wapi.flux.store.StoreChangeEvent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -55,6 +59,13 @@ public class Dispatcher {
         }
         post(actionBuilder.build());
     }
+
+    public void dispatch(ActionType type, Map<ValueKey, Object> map){
+        Action.Builder actionBuilder = Action.type(type);
+        actionBuilder.bundle(map);
+        post(actionBuilder.build());
+    }
+
 
     private boolean isEmpty(String type) {
         return type == null || type.isEmpty();
